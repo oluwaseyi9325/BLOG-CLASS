@@ -1,0 +1,27 @@
+{
+  "posts": [
+    {
+      "body": "fdhjfyusdjh",
+      "description": "fdhfsd",
+      "imageUrl": "fshfsa",
+      "category": "sport",
+      "news_ref": 593015531,
+      "id": 1
+    },
+    {
+      "body": "cjhjhd",
+      "description": "dfjhdf",
+      "imageUrl": "jjd",
+      "category": "sport",
+      "news_ref": 147551376,
+      "id": 2
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ]
+}
