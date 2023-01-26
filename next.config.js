@@ -13,27 +13,11 @@ const nextConfig = {
 
 module.exports = nextConfig;
 
-module.exports = {
-  async redirects() {
-    return [
-      {
-        source: '/user/digital_resume',
-        destination: '/',
-        permanent: true,
-      },
-    ]
-  },
-}
 
-module.exports={
-  images:{
-    domains:["images.unsplash.com"]
-  }
-}
 
 module.exports = {
   images: {
-    domains: ["res.cloudinary.com"],
+    domains: ["images.unsplash.com"],
     path: "",
     loader: "akamai",
     unoptimized: true,
