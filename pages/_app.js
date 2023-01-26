@@ -3,6 +3,7 @@ import Head from "next/head";
 import { AppProps } from "next/app";
 import { SWRConfig } from "swr";
 import axios from "axios";
+import "../styles/body.css"
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   const fetcher = (url) => axios.get(url).then((response) => response.data);

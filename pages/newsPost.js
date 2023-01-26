@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useRouter } from "next/router";
 import React, { useState, useRef } from "react";
 import { ClipLoader } from "react-spinners";
 function newsPost() {
@@ -8,26 +9,43 @@ function newsPost() {
   const [imageUrl, setImageUrl] = useState("");
   const cat_ref = useRef();
   const [loader, setLoader] = useState(false);
+  const routes=useRouter("")
+let created_at= new Date().toLocaleString()
+// console.log(created_at)
 
+
+
+// const created_at=()=>{
+//   let d = new Date();
+//   let year = d.getFullYear();
+//   let month = d.getMonth() + 1;
+//   let day = d.getDate();
+//   let hours = d.getHours();
+//   let minutes = d.getMinutes();
+//   let seconds = d.getSeconds();
+//   let time = `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+//   return time;
+// }
+// console.log(created_at())
   const btn = () => {
     let category = cat_ref.current.value;
-    let news_ref = Math.floor(Math.random() * 1000000000);
-
+    let news_ref = crypto.randomUUID();
+ 
     if (body && description && imageUrl && category && news_ref) {
       setLoader(true);
 
-      const details = { body, description, imageUrl, category, news_ref };
+      const details = { body, description, imageUrl, category, news_ref,created_at };
 
       axios
         .post("http://localhost:5000/posts", details)
         .then((res) => {
           if (res.data) {
             setLoader(false);
-            
             setBody("");
             setDescription("");
             setImageUrl("");
             cat_ref.current.value = "";
+            routes.push("/newsTable")
           }else{
             setLoader(false)
             alert("Please try again")

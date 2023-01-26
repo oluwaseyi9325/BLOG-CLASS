@@ -1,29 +1,67 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import NewsBox from "./NewsBox";
+import useSWR from "swr";
+import ReactReadMoreReadLess from "react-read-more-read-less";
+import TimeAgo from "timeago-react";
 
 function NewsCard() {
+  const { data, error, loading } = useSWR("http://localhost:5000/posts");
   return (
-    <div className="mt-5 row">
-      {[1, 2, 3, 4, 5, 6, 4, 5, 7, 7].map((val, i) => {
-        return (
-          <div class="card mt-3  col-lg-3 col-md-7 gap-3" key={i} style={{ width: "15rem" }}>
-            <Image src={require("../assets/img.jpg")} />
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-             <Link href="/">
-             <a  style={{textDecoration:'none'}} class="btn btn-primary">
-                Read More
-              </a>
-             </Link>
+    <div className="mt-3">
+      <h3>Popular News</h3>
+      <div className="mt-3 row">
+        {data?.map((val, i) => {
+          return (
+            <div key={i} className="col-lg-3 pb-4 col-md-6 col-sm-12  box">
+              <div
+                className="card card-sm shadow card-width"
+                style={{ borderRadius: "20px" }}
+              >
+                <Image
+                  className="card-img-top rounded-3"
+                  src={val.imageUrl}
+                  width={180}
+                  height={160}
+                />
+                <div className="card-body mt-1">
+                  <h5 className="card-title" style={{textTransform:"capitalize"}}>{val.category}</h5>
+                  <p className="card-text " style={{ textAlign: "justify" }}>
+                    <Link href={`/newsFeed?desc=${val.description}`}>
+                      <a
+                        className="text-muted"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <ReactReadMoreReadLess
+                          charLimit={150}
+                          readMoreText={""}
+                          readLessText={""}
+                        >
+                          {val.description}
+                        </ReactReadMoreReadLess>
+                      </a>
+                    </Link>
+                  </p>
+                  <div className="mb-2 d-flex justify-content-between">
+                    <Link href="/">
+                      <a
+                        style={{ textDecoration: "none" }}
+                        class="btn btn-sm btn-secondary"
+                      >
+                        Read More
+                      </a>
+                    </Link>
+                    <span className="text-small">
+                      <TimeAgo datetime={val.created_at} />
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

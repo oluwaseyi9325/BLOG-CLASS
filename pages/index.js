@@ -1,5 +1,6 @@
 import Navbar from 'Component/Navbar'
 import NewsCard from 'Component/NewsCard'
+import LatestNews from "Component/LatestNews"
 import React from 'react'
 
 function index() {
@@ -7,7 +8,9 @@ function index() {
     <div>
       <Navbar/>
 
+
       <div className='container'>
+        <LatestNews/>
         <NewsCard/>
       </div>
 
